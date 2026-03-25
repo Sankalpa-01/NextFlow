@@ -15,8 +15,11 @@ export const useExecuteFlow = () => {
 
   // 1. The hook now only takes the ID and basic auth options
   const { submit, run, isLoading, error } = useRealtimeTaskTrigger<any>(
-    "gemini-workflow"
-  );
+  "gemini-workflow", 
+  {
+    accessToken: "your_public_token_here" // This will come from your API later
+  }
+);
 
   // 2. Use a useEffect to "listen" for completion
   useEffect(() => {
