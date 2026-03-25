@@ -11,7 +11,7 @@
   "dependencies": {
     "@clerk/nextjs": "^7.0.6",
     "@google/genai": "^1.46.0",
-    "@trigger.dev/react-hooks": "^4.4.3",
+    "@trigger.dev/react-hooks": "^4.4.0",
     "@trigger.dev/sdk": "^3.3.17",
     "@uploadcare/react-uploader": "^1.13.0",
     "@xyflow/react": "^12.10.1",
