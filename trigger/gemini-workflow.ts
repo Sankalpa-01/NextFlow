@@ -1,7 +1,7 @@
-import { task } from "@trigger.dev/sdk";
 import { generateAiResponse } from "@/lib/ai/gemini";
 import dbConnect from "@/lib/db";
 import Workflow from "@/lib/db/models/workflow";
+import { task } from "@trigger.dev/sdk/v3";
 
 /**
  * NextFlow AI Runner

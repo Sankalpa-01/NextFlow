@@ -1,21 +1,18 @@
-import { defineConfig } from "@trigger.dev/sdk";
+import type { TriggerConfig } from "@trigger.dev/sdk/v3";
 
-export default defineConfig({
-    // You get this ID from your Trigger.dev Dashboard
-    project: "proj_your_project_id_here",
-
-    // Where the SDK should look for your AI task files
-    dirs: ["./trigger"],
-
-    retries: {
-        enabledInDev: true,
-        default: {
-            maxAttempts: 3,
-            minTimeoutInMs: 1000,
-            maxTimeoutInMs: 10000,
-            factor: 2,
-            randomize: true,
-        },
+export default {
+  project: "proj_your_project_id", // Replace with your actual Project ID from Trigger.dev dashboard
+  runtime: "node",
+  logLevel: "info",
+  maxDuration: 3600,
+  retries: {
+    enabledInDev: true,
+    default: {
+      maxAttempts: 3,
+      minTimeoutInMs: 1000,
+      maxTimeoutInMs: 30000,
+      factor: 2,
     },
-    maxDuration: 0
-});
+  },
+  dirs: ["./trigger"], // This is where your gemini-workflow.ts lives
+} satisfies TriggerConfig;

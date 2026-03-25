@@ -6,7 +6,8 @@ import {
   Background, 
   Controls, 
   Panel,
-  BackgroundVariant 
+  BackgroundVariant,
+  type Edge // Added this import
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 
@@ -14,21 +15,35 @@ import { useCanvas } from "@/hooks/use-canvas";
 import { GeminiNode } from "./nodes/gemini-node";
 import { InputNode } from "./nodes/input-node";
 import { WorkflowControls } from "./controls";
+import { AppNode } from "@/types/workflow"; // Import your custom node type
 
-// Define custom node types for React Flow
-const nodeTypes = {
-  geminiNode: GeminiNode,
-  inputNode: InputNode,
-};
+/**
+ * FIX: Define the interface for the props.
+ * This tells TypeScript that it's okay to receive nodes and edges from the server.
+ */
+interface WorkflowCanvasProps {
+  initialNodes: AppNode[];
+  initialEdges: Edge[];
+}
 
-export function WorkflowCanvas() {
+// Update the function to accept these props
+export function WorkflowCanvas({ initialNodes, initialEdges }: WorkflowCanvasProps) {
+  /**
+   * FIX: Pass the initial data into your hook.
+   * This ensures the canvas isn't empty when the page loads.
+   */
   const { 
     nodes, 
     edges, 
     onNodesChange, 
     onEdgesChange, 
     onConnect 
-  } = useCanvas();
+  } = useCanvas(initialNodes, initialEdges);
+
+  const nodeTypes = useMemo(() => ({
+    geminiNode: GeminiNode,
+    inputNode: InputNode,
+  }), []);
 
   const defaultEdgeOptions = {
     animated: true,
@@ -48,13 +63,8 @@ export function WorkflowCanvas() {
         fitView
         className="bg-dot-pattern"
       >
-        {/* The Grid Background (Krea.ai style dots) */}
         <Background variant={BackgroundVariant.Dots} gap={20} size={1} />
-        
-        {/* Zoom/Pan Controls */}
         <Controls position="bottom-left" showInteractive={false} />
-        
-        {/* Floating Action Bar */}
         <Panel position="top-right">
           <WorkflowControls />
         </Panel>

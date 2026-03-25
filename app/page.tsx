@@ -1,65 +1,89 @@
-import Image from "next/image";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { ArrowRight, Zap, Sparkles, Layout, ShieldCheck } from "lucide-react";
 
-export default function Home() {
+export default function LandingPage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <div className="flex flex-col min-h-screen bg-background">
+      {/* Navbar */}
+      <header className="px-6 lg:px-10 h-16 flex items-center border-b backdrop-blur-sm sticky top-0 z-50">
+        <Link href="/" className="flex items-center gap-2 font-bold text-xl">
+          <Zap className="h-6 w-6 text-blue-600" />
+          <span>NextFlow</span>
+        </Link>
+        <nav className="ml-auto flex gap-4 sm:gap-6 items-center">
+          <Link href="#features" className="text-sm font-medium hover:text-blue-600 transition-colors">Features</Link>
+          <Button asChild variant="ghost" size="sm">
+            <Link href="/sign-in">Sign In</Link>
+          </Button>
+          <Button asChild size="sm" className="bg-blue-600 hover:bg-blue-700">
+            <Link href="/sign-up">Get Started</Link>
+          </Button>
+        </nav>
+      </header>
+
+      <main className="flex-1">
+        {/* Hero Section */}
+        <section className="py-24 px-6 text-center space-y-8 max-w-4xl mx-auto">
+          <div className="inline-flex items-center rounded-full border px-4 py-1.5 text-sm font-medium bg-muted/50 text-blue-600 border-blue-200">
+            <Sparkles className="mr-2 h-4 w-4" />
+            <span>Now powered by Gemini 3 Flash</span>
+          </div>
+          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight">
+            Build AI Workflows <br /> 
+            <span className="text-blue-600">Without Limits.</span>
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+            Drag, drop, and connect Gemini AI nodes to build powerful agents. 
+            Automate your tasks in minutes with our visual canvas.
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+            <Button asChild size="lg" className="h-12 px-8 text-base bg-blue-600 hover:bg-blue-700">
+              <Link href="/dashboard">
+                Start Building <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+            </Button>
+            <Button variant="outline" size="lg" className="h-12 px-8 text-base">
+              View Demo
+            </Button>
+          </div>
+        </section>
+
+        {/* Feature Grid */}
+        <section id="features" className="py-24 bg-muted/30 border-y">
+          <div className="container px-6 mx-auto grid md:grid-cols-3 gap-12">
+            <FeatureCard 
+              icon={<Layout className="h-10 w-10 text-blue-600" />}
+              title="Visual Canvas"
+              description="Built on React Flow for a seamless, lag-free building experience."
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+            <FeatureCard 
+              icon={<Sparkles className="h-10 w-10 text-purple-600" />}
+              title="Gemini Intelligence"
+              description="Direct integration with Google's latest models for reasoning and text generation."
+            />
+            <FeatureCard 
+              icon={<ShieldCheck className="h-10 w-10 text-green-600" />}
+              title="Enterprise Ready"
+              description="Secure authentication with Clerk and background tasks via Trigger.dev."
+            />
+          </div>
+        </section>
       </main>
+
+      <footer className="py-10 border-t text-center text-sm text-muted-foreground">
+        © 2026 NextFlow Inc. Built for the Galaxy.ai Innovation Challenge.
+      </footer>
+    </div>
+  );
+}
+
+function FeatureCard({ icon, title, description }: { icon: React.ReactNode, title: string, description: string }) {
+  return (
+    <div className="flex flex-col items-center text-center space-y-4 p-6 rounded-2xl bg-background border shadow-sm">
+      <div className="mb-2">{icon}</div>
+      <h3 className="text-xl font-bold">{title}</h3>
+      <p className="text-muted-foreground">{description}</p>
     </div>
   );
 }
