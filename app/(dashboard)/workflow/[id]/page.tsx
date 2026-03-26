@@ -8,16 +8,18 @@ import { auth } from "@clerk/nextjs/server";
 export default async function WorkflowEditorPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
   const { userId } = await auth();
   if (!userId) return null;
 
   await dbConnect();
 
+  const { id } = await params;
+
   // Fetch workflow and ensure it belongs to the logged-in user
   const workflow = await Workflow.findOne({
-    _id: params.id,
+    _id: id,
     userId: userId,
   }).lean();
 
