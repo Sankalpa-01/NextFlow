@@ -1,10 +1,12 @@
-import { eventTrigger, TriggerClient } from "@trigger.dev/sdk";
+import { TriggerClient, eventTrigger } from "@trigger.dev/sdk";
 
+// 🟢 CRITICAL: This must be named 'client' and must be exported
 export const client = new TriggerClient({
   id: "nextflow-ai", 
   apiKey: process.env.TRIGGER_SECRET_KEY,
 });
 
+// We keep this because your previous error mentioned it
 export const geminiWorkflow = client.defineJob({
   id: "gemini-ai-task",
   name: "Gemini AI Task Processor",
