@@ -3,8 +3,6 @@
 
 NextFlow is a full-stack SaaS application that allows users to design, save, and automate AI workflows using a drag-and-drop canvas. It bridges the gap between complex AI prompting and visual logic.
 
-![NextFlow Canvas Screenshot](https://via.placeholder.com/800x450?text=NextFlow+Canvas+Demo)
-
 ## Key Features
 
 - **Visual Logic Canvas:** Built with `@xyflow/react` (React Flow) for professional-grade node manipulation.
